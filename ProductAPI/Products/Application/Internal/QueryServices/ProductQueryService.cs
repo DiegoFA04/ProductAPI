@@ -8,14 +8,24 @@ namespace ProductAPI.Products.Application.Internal.QueryServices;
 
 public class ProductQueryService(IProductRepository productRepository) : IProductQueryService
 {
-    public async Task<Product?> Handle(GetProductByIdQuery query)
-    {
-        return await productRepository.FindByIdAsync(query.ProductId);
-    }
+  public async Task<Product?> Handle(GetProductByIdQuery query)
+  {
+    return await productRepository.FindByIdAsync(query.ProductId);
+  }
 
-    public async Task<IEnumerable<Product>> Handle(GetAllProductsQuery query)
-    {
-        return await productRepository.ListAsync();
-    }
-    
+  public async Task<IEnumerable<Product>> Handle(GetAllProductsQuery query)
+  {
+
+    return await productRepository.FindAllProducts();
+  }
+
+  public async Task<List<Product?>> Handle(GetProductsByStockQuery query)
+  {
+    return await productRepository.FindProductByStockAsync(query.Stock);
+  }
+
+  public async Task<Product?> Handle(GetProductByNameQuery query)
+  {
+    return await productRepository.FindProductByNameAsync(query.Name);
+  }
 }

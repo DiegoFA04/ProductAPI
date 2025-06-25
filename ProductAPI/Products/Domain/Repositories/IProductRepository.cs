@@ -5,5 +5,9 @@ namespace ProductAPI.Products.Domain.Repositories;
 
 public interface IProductRepository : IBaseRepository<Product>
 {
-    Task<Product?> FindProductByNameAsync(string name);
+  Task<Product?> FindProductByNameAsync(string name);
+
+  Task<List<Product?>> FindProductByStockAsync(int stock);
+
+  Task<IEnumerable<Product>> FindAllProducts();
 }
